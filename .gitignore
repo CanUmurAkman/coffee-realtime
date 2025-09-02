@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Airflow local state
+airflow/airflow.db
+airflow/*.pid
+airflow/logs/
+
+# Spark checkpoints and data lakes
+checkpoints/
+data/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
