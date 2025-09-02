@@ -75,12 +75,12 @@ cd /Users/macbookpro/Desktop/coffee-realtime
 python -m venv .venv
 source .venv/bin/activate
 
-# requirements used in this repo:
-# - kafka-python (new enough for Python 3.13)
-# - pyspark 3.5.1
-# - dotenv (optional)
-# - duckdb (new enough to ship wheels for 3.13)
-# - numpy and pandas (compatible with 3.13)
+ requirements used in this repo:
+ - kafka-python (new enough for Python 3.13)
+ - pyspark 3.5.1
+ - dotenv (optional)
+ - duckdb (new enough to ship wheels for 3.13)
+ - numpy and pandas (compatible with 3.13)
 cat > requirements.txt <<'REQ'
 kafka-python>=2.1.2,<3
 pyspark==3.5.1
@@ -92,7 +92,7 @@ REQ
 
 pip install --upgrade -r requirements.txt
 
-# macOS only: ensure Java 17 is visible to Spark
+ macOS only: ensure Java 17 is visible to Spark
 export JAVA_HOME=$(/usr/libexec/java_home -v 17)
 java -version
 
@@ -119,7 +119,7 @@ airflow users create \
   --username admin --firstname You --lastname User \
   --role Admin --email you@example.com --password admin
 
-# DAG uses this variable to locate your repo
+ DAG uses this variable to locate your repo
 airflow variables set repo_root "$(pwd)"
 
 Airflow parses many example Directed Acyclic Graphs by default. You can hide them by setting export AIRFLOW__CORE__LOAD_EXAMPLES=False before starting webserver and scheduler.
@@ -134,12 +134,12 @@ docker compose up -d
 
 Terminal 2 — Spark stream (consumer)
 source .venv/bin/activate
-# stream_orders.py includes the Kafka connector via spark.jars.packages
+ stream_orders.py includes the Kafka connector via spark.jars.packages
 python spark/stream_orders.py
 
 Terminal 3 — Producer (order simulator)
 source .venv/bin/activate
-# Default rate ~1 event/second; press Ctrl+C when you have enough data
+ Default rate ~1 event/second; press Ctrl+C when you have enough data
 python generator/generate_orders.py
 
 Let it run a few minutes. Then stop the producer with Ctrl+C.
@@ -154,7 +154,7 @@ Where is data stored?
 
 Step B — Compute daily KPI for today (gold)
 source .venv/bin/activate
-# Pass the date explicitly. We set the Spark session time zone to UTC in the script.
+ Pass the date explicitly. We set the Spark session time zone to UTC in the script.
 python spark/batch_daily_kpis.py 2025-09-02
 
 This creates data/gold/daily_key_metrics_2025-09-02/part-*.csv containing a single row:
